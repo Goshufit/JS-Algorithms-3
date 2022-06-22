@@ -2,23 +2,60 @@
 // Return a sum of all parameters entered regardless of the amount of numbers - NO ARRAYS
 // ex. addAll(2,5,6,7) === 20
 
-function addAll() {
-    //The call() method calls a function with a given this value and arguments provided individually.
-    let args = Array.prototype.slice.call(arguments);
-    let total = 0;
-    for (i = 0; i< args.length; i++) {
-        total += args[i];
-    }
-    return total;
-}
+// function addAll() {
+//SOLUTION 1//
+//The call() method calls a function with a given this value and arguments provided individually.
+// let args = Array.prototype.slice.call(arguments);
+// let total = 0;
+// for (i = 0; i< args.length; i++) {
+//     total += args[i];
+// }
+// return total;
 
-console.log(addAll(2, 5, 6, 7))
+
+//SOLUTION 2 ...rest & reduce/forEach//
+//...rest will return the rest of the array excluding the first element in the parameter num represesnt the first number in the parameter and rest will convert the remaining numbers in the parameter to an array.
+//Turns data sets into arrays so you can use array methods on them
+// function addAll(...numbers) {
+//     let total = 0;
+//     numbers.forEach(num => {
+//         total += num;
+//     });
+// }
+
+
+//SOLUTION 2 - ...rest & reduce/forEach
+// function addAll(...numbers) {
+//     return numbers.reduce((acc, cur) => acc + cur);
+// } 
+
+// console.log(addAll(2, 5, 6, 7))
 
 // CHALLENGE 2: SUM ALL PRIMES
 // Pass in a number to loop up to and add all of the prime numbers. A prime number is a whole number greater than 1 whose only factors are 1 and itself
 // ex. sumAllPrimes(10) == 17
 
-function sumAllPrimes() { }
+function sumAllPrimes(num) {
+    let total = 0;
+
+    function checkForPrime(i) {
+        for (let j = 2; j < i; j++) {
+            if (i % j === 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    for (let i = 2; i <= num; i++) {
+        if (checkForPrime(i)) {
+            total += i;
+        }
+    }
+    return total;
+}
+
+console.log(sumAllPrimes(10))
 
 // CHALLENGE 3: SEEK & DESTROY
 // Remove from the array whatever is in the following arguments. Return the leftover numbers in an array
